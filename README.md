@@ -2,6 +2,8 @@
 
 Production-ready landing page for DateCraft Chocolate Dipped Dates.
 
+https://ankithrox2003.github.io/datecraft/
+
 ## View
 
 Open `DateCraft_landing.html` in a browser. All assets are local — no server or internet required.

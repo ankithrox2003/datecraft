@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="X-Frame-Options" content="DENY" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>DateCraft — Premium Chocolate Dipped Dates</title>
+<style>
+  :root[data-theme="light"] {
+    --bg: #fdf8f3;
+    --bg-alt: #f8f0e7;
+    --surface: #ffffff;
+    --surface-warm: #fef9f4;
+    --border: #e8ddd0;
+    --border-light: #f0e8dd;
+    --text: #2d1a10;
+    --text-secondary: #6b5a4e;
+    --muted: #9a8a7a;
+    --accent: #c9952c;
+    --accent-warm: #d4a574;
+    --accent-deep: #8b6914;
+    --cream: #faf5ee;
+    --gold-light: #f5e6c8;
+    --shadow-sm: 0 2px 12px rgba(45,26,16,0.06);
+    --shadow-md: 0 8px 30px rgba(45,26,16,0.08);
+    --shadow-lg: 0 20px 50px rgba(45,26,16,0.12);
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1210;
+    --bg-alt: #231a14;
+    --surface: #231a14;
+    --surface-warm: #2d1f18;
+    --border: #3d2a20;
+    --border-light: #2d1f18;
+    --text: #f5e6d3;
+    --text-secondary: #d4c4a8;
+    --muted: #b09a80;
+    --accent: #e8c88a;
+    --accent-warm: #d4a574;
+    --accent-deep: #f5e6c8;
+    --cream: #150f0b;
+    --gold-light: #3d2a20;
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
+    --shadow-md: 0 8px 30px rgba(0,0,0,0.5);
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.6);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── Faded cross-section background image ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("datecraft-cross-section.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.06;
+    filter: blur(1px);
+    transition: opacity 0.3s;
+  }
+  [data-theme="dark"] body::before {
+    opacity: 0.1;
+    filter: blur(1px) brightness(0.7);
+  }
+
+  /* ── Subtle grain texture ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background: rgba(253,248,243,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    transition: all 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(253,248,243,0.97);
+    padding: 14px 50px;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent-deep);
+    text-decoration: none;
+  }
+  .nav-brand span {
+    color: var(--accent);
+  }
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent-deep); }
+  .nav-cta {
+    padding: 9px 20px;
+    background: var(--accent) !important;
+    color: #fff !important;
+    border-radius: 25px;
+    font-weight: 600 !important;
+    transition: all 0.25s !important;
+  }
+  .nav-cta:hover {
+    background: var(--accent-deep) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(201,149,44,0.3);
+  }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .theme-toggle:hover {
+    border-color: var(--accent-warm);
+    color: var(--accent-deep);
+  }
+  .theme-toggle .icon-dark { display: none; }
+  .theme-toggle .icon-light { display: inline; }
+  [data-theme="dark"] .theme-toggle .icon-dark { display: inline; }
+  [data-theme="dark"] .theme-toggle .icon-light { display: none; }
+
+  /* ── Sections ── */
+  section {
+    position: relative;
+    z-index: 10;
+    padding: 100px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── Hero ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Hero Background Video ── */
+  .hero-video-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+  }
+  .hero-video-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4) saturate(1.2);
+  }
+  .hero-video-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(253,248,243,0.95) 0%,
+      rgba(253,248,243,0.82) 40%,
+      rgba(253,248,243,0.55) 70%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+  [data-theme="dark"] .hero-video-bg::after {
+    background: linear-gradient(
+      to right,
+      rgba(26,18,16,0.95) 0%,
+      rgba(26,18,16,0.85) 40%,
+      rgba(26,18,16,0.6) 70%,
+      transparent 100%
+    );
+  }
+
+  /* ── Audio toggle ── */
+  .audio-toggle {
+    position: absolute;
+    bottom: 80px;
+    right: 30px;
+    z-index: 20;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.25s;
+  }
+  .audio-toggle:hover {
+    background: rgba(255,255,255,0.35);
+    transform: scale(1.1);
+  }
+  .audio-toggle .icon-muted { display: inline; }
+  .audio-toggle .icon-unmuted { display: none; }
+  .audio-toggle.unmuted .icon-muted { display: none; }
+  .audio-toggle.unmuted .icon-unmuted { display: inline; }
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-text {
+    max-width: 540px;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    background: var(--gold-light);
+    border: 1px solid var(--accent-warm);
+    border-radius: 20px;
+    font-size: 0.72rem;
+    color: var(--accent-deep);
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero-title {
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 12px;
+    animation: fadeInUp 0.7s ease 0.1s both;
+  }
+  .hero-title .highlight {
+    color: var(--accent);
+    display: block;
+  }
+  .hero-tagline {
+    font-size: 1.15rem;
+    color: var(--accent);
+    font-style: italic;
+    margin-bottom: 16px;
+    animation: fadeInUp 0.7s ease 0.2s both;
+  }
+  .hero-sub {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 32px;
+    line-height: 1.8;
+    animation: fadeInUp 0.7s ease 0.3s both;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.7s ease 0.4s both;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(201,149,44,0.25);
+  }
+  .btn-primary:hover {
+    background: var(--accent-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201,149,44,0.35);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--accent-deep);
+    border-color: var(--accent-warm);
+  }
+  .btn-outline:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  /* ── Hero Image ── */
+  .hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInRight 0.8s ease 0.3s both;
+  }
+  .hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+  }
+  .hero-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: linear-gradient(135deg, var(--gold-light), rgba(212,165,116,0.15));
+    border-radius: 20px;
+    z-index: -1;
+  }
+  .hero-image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    display: block;
+  }
+  .image-badge {
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .image-badge .badge-icon {
+    width: 36px;
+    height: 36px;
+    background: #2d8a4e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .image-badge .badge-text {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .image-badge .badge-text strong {
+    display: block;
+    color: var(--text);
+    font-size: 0.85rem;
+  }
+
+  /* ── Scroll indicator ── */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: 2px;
+  }
+  .scroll-indicator .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent-warm), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.3; height: 30px; }
+    50% { opacity: 1; height: 45px; }
+  }
+
+  /* ── Features ── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .section-subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.35s;
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  .feature-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .feature-card:hover {
+    border-color: var(--accent-warm);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .feature-card:hover .feature-icon {
+    transform: scale(1.15);
+  }
+  .feature-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .feature-desc {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  /* ── Flavors ── */
+  .flavors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .flavor-card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 28px 24px 24px;
+    text-align: center;
+    transition: all 0.35s;
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  .flavor-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .flavor-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-warm);
+  }
+  .flavor-img-wrap {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 18px;
+    animation: float-ball 5s ease-in-out infinite;
+  }
+  .flavor-card:nth-child(2) .flavor-img-wrap { animation-delay: -1.6s; }
+  .flavor-card:nth-child(3) .flavor-img-wrap { animation-delay: -3.2s; }
+  @keyframes float-ball {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .flavor-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .flavor-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .flavor-desc {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  /* ── Story ── */
+  #story {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .story-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .story-image img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    display: block;
+    margin: 0 auto;
+  }
+  .story-date {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .story-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .story-body {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    margin-bottom: 14px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  /* ── Making ── */
+  #making {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .making-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .making-image img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    display: block;
+    margin: 0 auto;
+  }
+  .making-paragraph {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    margin-bottom: 16px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .making-paragraph:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── Enquiry Form ── */
+  #enquiry {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .enquiry-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+  }
+  .enquiry-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .enquiry-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .enquiry-visual img {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    display: block;
+    margin: 0 auto;
+  }
+  .enquiry-form-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+  }
+  .form-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .form-subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 24px;
+  }
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(201,149,44,0.1);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .form-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Segoe UI', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 6px;
+  }
+  .form-submit:hover {
+    background: var(--accent-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,149,44,0.3);
+  }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 30px;
+  }
+  .form-success.show { display: block; }
+  .form-success .check-icon {
+    width: 50px;
+    height: 50px;
+    background: #2d8a4e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    color: #fff;
+    font-size: 1.4rem;
+  }
+  .form-success h3 {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .form-success p {
+    color: var(--muted);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.9rem;
+  }
+
+  /* ── CTA ── */
+  #cta {
+    text-align: center;
+    padding: 80px 40px;
+  }
+  .cta-box {
+    background: linear-gradient(135deg, var(--surface), var(--surface-warm));
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 56px 40px;
+    box-shadow: var(--shadow-md);
+  }
+  .cta-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .cta-desc {
+    color: var(--muted);
+    margin-bottom: 26px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 36px 40px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-family: 'Segoe UI', sans-serif;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+    z-index: 10;
+  }
+  footer .footer-brand {
+    font-size: 1.1rem;
+    color: var(--accent-deep);
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'Georgia', serif;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .hero-content { grid-template-columns: 1fr; gap: 40px; }
+    .hero-text { max-width: 100%; text-align: center; }
+    .hero-buttons { justify-content: center; }
+    .hero-socials { justify-content: center; }
+    .story-grid { grid-template-columns: 1fr; gap: 30px; }
+    .enquiry-grid { grid-template-columns: 1fr; gap: 30px; }
+    .enquiry-visual { display: block; }
+    .enquiry-visual img { max-width: 350px; }
+    .making-grid { grid-template-columns: 1fr; gap: 30px; }
+    .making-image img { max-width: 350px; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: var(--surface);
+      padding: 20px;
+      gap: 14px;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: var(--shadow-md);
+    }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: block; }
+    section { padding: 70px 20px; }
+    .features-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .flavors-grid { grid-template-columns: 1fr; gap: 18px; }
+    .form-row { grid-template-columns: 1fr; }
+    .story-container { padding: 0 20px; }
+    .enquiry-container { padding: 0 20px; }
+    .enquiry-form-wrapper { padding: 28px 22px; }
+    .hero-image-wrapper { max-width: 380px; margin: 0 auto; }
+    .flavor-img-wrap { width: 160px; height: 160px; }
+    .cta-box { padding: 40px 24px; }
+    .hero-title { font-size: 2.4rem; }
+    .section-title { font-size: 1.8rem; }
+  }
+  @media (max-width: 480px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .hero-buttons .btn { width: 100%; max-width: 280px; justify-content: center; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .cta-buttons .btn { width: 100%; max-width: 280px; justify-content: center; }
+    .hero-socials { flex-direction: column; gap: 8px; }
+    .nav-brand { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">Date<span>Craft</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#features">Benefits</a></li>
+    <li><a href="#flavors">Flavors</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#making">Making</a></li>
+    <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="icon-light">☀️ Light</span><span class="icon-dark">🌙 Dark</span></button></li>
+    <li><a href="#enquiry" class="nav-cta">Enquire</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <!-- Background video -->
+  <div class="hero-video-bg">
+    <video autoplay loop muted playsinline id="heroVideo">
+      <source src="datecraft-intro.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <!-- Audio toggle -->
+  <button class="audio-toggle" id="audioToggle" aria-label="Toggle audio">
+    <span class="icon-muted">🔇</span>
+    <span class="icon-unmuted">🔊</span>
+  </button>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">Premium Dates · 200g</div>
+      <h1 class="hero-title">
+        Chocolate Dipped
+        <span class="highlight">Dates</span>
+      </h1>
+      <p class="hero-tagline">Crafted with nature, dipped in love.</p>
+      <p class="hero-sub">
+        Three luxurious flavors handcrafted with premium Medjool dates and real chocolate.
+        No added sugar. No artificial anything. Just pure indulgence.
+      </p>
+      <div class="hero-buttons">
+        <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
+        <a href="#features" class="btn btn-outline">Why DateCraft</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-image-wrapper">
+        <img src="datecraft-product.jpg" alt="DateCraft Chocolate Dipped Dates - Premium 200g pouch with dark, milk, and white chocolate flavors" />
+        <div class="image-badge">
+          <div class="badge-icon">V</div>
+          <div class="badge-text">
+            <strong>Vegetarian</strong>
+            100% Natural
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    Scroll
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="section-header">
+    <h2 class="section-title">Why DateCraft?</h2>
+    <p class="section-subtitle">Five promises we make — and keep — with every pack.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🚫</span>
+      <div class="feature-name">No Added Sugar</div>
+      <div class="feature-desc">Sweetness from premium dates only.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🍃</span>
+      <div class="feature-name">No Artificial Colours</div>
+      <div class="feature-desc">What you see is what nature intended.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🔬</span>
+      <div class="feature-name">No Artificial Flavours</div>
+      <div class="feature-desc">Real chocolate. Real dates. Nothing fake.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🌿</span>
+      <div class="feature-name">Rich in Fibre</div>
+      <div class="feature-desc">Natural dietary fibre for gut health.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-name">Natural Energy</div>
+      <div class="feature-desc">Sustained energy, no crash, no jitters.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Flavors -->
+<section id="flavors">
+  <div class="section-header">
+    <h2 class="section-title">Three Luxurious Flavors</h2>
+    <p class="section-subtitle">Every piece is a different experience. Find your favourite — or love them all.</p>
+  </div>
+  <div class="flavors-grid">
+    <div class="flavor-card reveal">
+      <div class="flavor-img-wrap">
+        <img src="flavor-dark.jpg" alt="Dark Chocolate Dipped Date with sea salt" />
+      </div>
+      <div class="flavor-name">Dark Chocolate</div>
+      <div class="flavor-desc">Bold, intense cocoa with a bittersweet finish. For the purist.</div>
+    </div>
+    <div class="flavor-card reveal">
+      <div class="flavor-img-wrap">
+        <img src="flavor-milk.jpg" alt="Milk Chocolate Dipped Date with nuts" />
+      </div>
+      <div class="flavor-name">Milk Chocolate</div>
+      <div class="flavor-desc">Creamy, smooth, universally loved. The perfect balance.</div>
+    </div>
+    <div class="flavor-card reveal">
+      <div class="flavor-img-wrap">
+        <img src="flavor-white.jpg" alt="White Chocolate Dipped Date with drizzle" />
+      </div>
+      <div class="flavor-name">White Chocolate</div>
+      <div class="flavor-desc">Vanilla-kissed cocoa butter with a silky melt. Delicate indulgence.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Story -->
+<section id="story">
+  <div class="story-container">
+    <div class="story-grid">
+      <div class="story-image reveal">
+        <img src="datecraft-product.jpg" alt="DateCraft product close-up showing chocolate dipped dates and natural ingredients" />
+      </div>
+      <div class="story-text reveal">
+        <div class="story-date">Est. 2024</div>
+        <h2 class="story-title">From Nature. For You.</h2>
+        <p class="story-body">
+          DateCraft began with a simple idea: make indulgence guilt-free.
+          We source the finest premium Medjool dates, hand-dip each one in
+          real chocolate — dark, milk, or white — and seal in the freshness.
+        </p>
+        <p class="story-body">
+          No shortcuts. No artificial anything. Just nature, craft, and
+          a whole lot of love in every resealable pouch.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Making -->
+<section id="making">
+  <div class="section-header">
+    <h2 class="section-title">How It's Made</h2>
+    <p class="section-subtitle">From farm to factory to your hands — every step matters.</p>
+  </div>
+  <div class="making-grid">
+    <div class="making-image reveal">
+      <img src="datecraft-cross-section.jpg" alt="Cross-section of DateCraft chocolate dipped dates showing layers of chocolate, date, and nut filling" />
+    </div>
+    <div class="making-text reveal">
+      <p class="making-paragraph">
+        It begins in the sun-drenched groves where our premium Medjool dates are grown.
+        Each date is hand-picked at peak ripeness, when the fruit is at its sweetest and most tender.
+        The dates are carefully transported to our facility, where they are washed, pitted, and
+        prepared for their chocolate journey.
+      </p>
+      <p class="making-paragraph">
+        Whole nuts — almonds, walnuts, or pistachios — are nestled into the heart of each date,
+        adding a satisfying crunch that contrasts with the soft, caramel-like flesh.
+        The stuffed dates are then hand-dipped, one by one, into vats of real,
+        tempered chocolate — dark, milk, or white — ensuring an even, glossy coating
+        that snaps delicately when you take your first bite.
+      </p>
+      <p class="making-paragraph">
+        Each piece is then finished with a garnish: a sprinkle of sea salt for the dark
+        chocolate variety, chopped nuts for milk chocolate, or a drizzle of contrasting
+        chocolate for white. The coated dates are cooled, set, and carefully packaged
+        in our resealable pouch, locking in freshness until you are ready to indulge.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Enquiry Form -->
+<section id="enquiry">
+  <div class="enquiry-container">
+    <div class="enquiry-grid">
+      <div class="enquiry-visual reveal">
+        <img src="datecraft-product.jpg" alt="DateCraft Chocolate Dipped Dates collection" />
+      </div>
+      <div class="enquiry-form-wrapper reveal">
+        <h2 class="form-title">Enquire Now</h2>
+        <p class="form-subtitle">Interested in DateCraft? Fill in your details and we'll get back to you within 24 hours.</p>
+        
+        <form id="enquiryForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="john@example.com" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" />
+            </div>
+            <div class="form-group">
+              <label for="flavor">Preferred Flavor</label>
+              <select id="flavor" name="flavor">
+                <option value="any">Any / All Flavors</option>
+                <option value="dark">Dark Chocolate</option>
+                <option value="milk">Milk Chocolate</option>
+                <option value="white">White Chocolate</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell us about your enquiry — bulk orders, retail partnership, general questions..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Enquiry</button>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <div class="check-icon">✓</div>
+          <h3>Enquiry Sent!</h3>
+          <p>Thank you for your interest in DateCraft. We'll get back to you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-box reveal">
+    <h2 class="cta-title">Ready to Indulge?</h2>
+    <p class="cta-desc">Get DateCraft Chocolate Dipped Dates (200g) delivered to your doorstep.</p>
+    <div class="cta-buttons">
+      <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
+      <a href="#hero" class="btn btn-outline">Back to Top</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">DateCraft</div>
+  <p>© 2025 DateCraft. Crafted with nature, dipped in love. All rights reserved.</p>
+</footer>
+
+<script>
+  // ── Theme toggle ──
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+
+  function setTheme(t) {
+    html.setAttribute('data-theme', t);
+    localStorage.setItem('datecraft-theme', t);
+  }
+
+  const savedTheme = localStorage.getItem('datecraft-theme') || 'light';
+  setTheme(savedTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    setTheme(current === 'light' ? 'dark' : 'light');
+  });
+
+  // ── Scroll reveal ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Sticky nav ──
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Mobile nav ──
+  document.getElementById('nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open'));
+  });
+
+  // ── Smooth scroll ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#' || id.length < 2) return;
+      const target = document.getElementById(id.slice(1));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── Active nav link ──
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + entry.target.id ? 'var(--accent-deep)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.3 }).observe(document.getElementById('hero'));
+
+  // ── Audio toggle ──
+  const audioToggle = document.getElementById('audioToggle');
+  const heroVideo = document.getElementById('heroVideo');
+  if (audioToggle && heroVideo) {
+    audioToggle.addEventListener('click', () => {
+      heroVideo.muted = !heroVideo.muted;
+      audioToggle.classList.toggle('unmuted', !heroVideo.muted);
+    });
+  }
+
+  // ── Form submission (demo) ──
+  document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Collect form data
+    const data = new FormData(this);
+    const entries = {};
+    data.forEach((val, key) => entries[key] = val);
+    console.log('Enquiry data:', entries);
+    
+    // Hide form, show success
+    this.style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  });
+</script>
+</body>
+</html>
